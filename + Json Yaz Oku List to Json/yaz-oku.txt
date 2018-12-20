@@ -1,0 +1,41 @@
+Nuget>JSON 
+
+YAZZ
+
+List<Personel> personeller = new List<Personel>();
+
+            for (int i = 0; i < 100; i++)
+            {
+                Personel temp = new Personel();
+                temp.ID = Guid.NewGuid();
+                temp.Adi = FakeData.NameData.GetFirstName();
+                temp.Soyadi = FakeData.NameData.GetSurname();
+                temp.Email = $"{temp.Adi}{temp.Soyadi}@{FakeData.NetworkData.GetDomain()}";
+                temp.TelNumarasi = FakeData.PhoneNumberData.GetPhoneNumber();
+
+                personeller.Add(temp);
+            }
+
+       
+
+            if(!Directory.Exists("d:\\JSONCUM"))
+            { 
+                Directory.CreateDirectory("d:\\JSONCUM");
+            }
+
+            //OLAYBURADA @@@@@@@@@@@@@@@@@@
+            string Jsoncevrilmiþhali = Newtonsoft.Json.JsonConvert.SerializeObject(personeller);
+            File.WriteAllText("d:\\JSONCUM\\xmldencektm", Jsoncevrilmiþhali);
+
+
+OKU
+
+
+ string jasonokunandata = File.ReadAllText("d:\\JSONCUM\\xmldencektm.txt");
+            List<OBJEM> GelenObjelerim= Newtonsoft.Json.JsonConvert.DeserializeObject<List<OBJEM>>(jasonokunandata);
+
+            foreach (OBJEM item in GelenObjelerim)
+            {
+                //OBJEYI OVERRIDE ET.
+                MessageBox.Show(item.ToString());
+            }
